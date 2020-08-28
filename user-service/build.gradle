@@ -1,0 +1,11 @@
+dependencies {
+    implementation(
+            'org.postgresql:postgresql:42.2.2',
+            'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.cloud:spring-cloud-starter-config',
+            'org.springframework.cloud:spring-cloud-starter-openfeign',
+            'org.springframework.cloud:spring-cloud-stream-binder-rabbit',
+            'org.springframework.cloud:spring-cloud-starter-netflix-hystrix',
+            'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client',
+    )
+}

@@ -1,0 +1,53 @@
+buildscript {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    }
+    ext {
+        springBootVersion = '2.3.3.RELEASE'
+        springCloudVersion = 'Hoxton.SR7'
+        springBootManagementVersion = '1.0.8.RELEASE'
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:${springBootManagementVersion}")
+    }
+}
+
+// 所有模块/项目的通用配置
+allprojects {
+    group = 'com.blockchain'
+    version = '0.0.1-SNAPSHOT'
+    apply plugin: 'idea'
+}
+
+// 子模块/项目的统一配置
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+    // 指定JDK版本
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    // 指定编码格式
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    }
+
+
+    dependencies {
+        compile(
+                'org.projectlombok:lombok:1.18.10',
+                'org.apache.httpcomponents:httpclient:4.5.12',
+                // Apache Commons
+                'org.apache.commons:commons-lang3:3.10',
+                'io.github.openfeign:feign-okhttp:11.0',
+                'com.google.code.gson:gson:2.6.2',
+                'org.springframework.boot:spring-boot-starter-actuator',
+        )
+    }
+
+    dependencyManagement {
+        imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
+        imports { mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}" }
+    }
+}

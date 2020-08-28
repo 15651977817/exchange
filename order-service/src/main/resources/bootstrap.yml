@@ -1,0 +1,19 @@
+server:
+  port: 8082
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 18.225.37.214:28848
+        namespace: c4f848d0-be3b-433f-8267-610d669462d2
+      config:
+        file-extension: yml
+        namespace: c4f848d0-be3b-433f-8267-610d669462d2
+        server-addr: 18.225.37.214:28848
+  application:
+    name: order
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+
