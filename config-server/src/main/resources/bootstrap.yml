@@ -4,15 +4,16 @@ spring:
   profiles:
     active: test
   application:
-    name: spring-cloud-config
+    name: config
   cloud:
     config:
       server:
         git:
-          uri: http://codelab.biclub.io/biclub/config.git
-          username: zhangxu
+          uri: https://github.com/15651977817/config
+          username: 15651977817
           password: zx1994324
-          default-label: ade-test
+          default-label: test
+          force-pull: true
     bus:
       trace:
         enabled: true
@@ -25,6 +26,7 @@ eureka:
   client:
     service-url:
       defaultZone: http://10.18.0.10:8080/eureka/
+
 management:
   endpoints:
     web:

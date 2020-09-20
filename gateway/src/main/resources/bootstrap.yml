@@ -1,0 +1,45 @@
+server:
+  port: 8888
+spring:
+  profiles:
+    active: test
+  application:
+    name: gateway
+    bus:
+      trace:
+        enabled: true
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+        - Path=/user/**
+        filters:
+        - name: RequestRateLimiter
+          args:
+            key-resolver: "#{@uriKeyResolver}"
+            #令牌桶每秒填充平均速率
+            redis-rate-limiter.replenishRate: 1
+            #令牌桶总容量
+            redis-rate-limiter.burstCapacity: 3
+            redis-rate-limiter.requestedTokens: 1
+  redis:
+    host: 106.54.127.4
+    password: 123456
+    timeout: 5000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://10.18.0.10:8080/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

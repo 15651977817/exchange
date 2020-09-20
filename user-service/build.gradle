@@ -1,6 +1,7 @@
 dependencies {
     implementation(
             'org.postgresql:postgresql:42.2.2',
+            'org.apache.shiro:shiro-spring:1.6.0',
             'org.springframework.boot:spring-boot-starter-web',
             'org.springframework.cloud:spring-cloud-starter-config',
             'org.springframework.cloud:spring-cloud-starter-openfeign',
